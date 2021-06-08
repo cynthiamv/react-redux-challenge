@@ -1,17 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { createStore, applyMiddleware } from 'redux';
+import initState from './redux/reducers/formReducer';
+import allReducers from './redux/reducers';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { loadState, saveState } from './localStorage'
+
+
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const persistedState = loadState();
+
+const store = createStore(allReducers, {
+  ...initState,
+  ...persistedState
+}, applyMiddleware(thunk));
+
+store.subscribe(() => {
+  saveState({
+    formReducer: store.getState().formReducer
+  });
+});
+
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
