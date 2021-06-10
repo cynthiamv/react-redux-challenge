@@ -3,7 +3,7 @@ import { TableRowStyled } from './TableRow.style';
 
 const TableRow = ({ name, country, birthday }) => {
   const getFullDate = dateString => {
-    const date = new Date(dateString);
+    const date = new Date(`${dateString}T00:00:00`);
     const day = date.toLocaleString("en-US", {day: "numeric"});
     const month = date.toLocaleString("en-US", {month: "numeric"});
     const year = date.toLocaleDateString("en-US", {year: "numeric"});

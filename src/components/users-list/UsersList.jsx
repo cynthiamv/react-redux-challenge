@@ -5,7 +5,6 @@ import { DotsIcon, TableStyled } from './UsersList.style';
 
 const UsersList = () => {
   const data = localStorage.state && JSON.parse(localStorage.state).formReducer.users
-  
   const formData = useSelector(state => state.formReducer);
 
   return(

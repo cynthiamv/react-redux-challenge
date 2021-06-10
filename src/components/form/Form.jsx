@@ -30,16 +30,15 @@ const Form = () => {
     const userCountry = e.target.country.value;
     const userName = `${e.target.firstName.value} ${e.target.lastName.value}`
     const userBirthday = e.target.birthday.value;
+
     const userAge = calculateAge(userBirthday)
     dispatch(addNewUser(userName, userCountry, userBirthday, userAge))
-
     setShowMessage(true);
 
     e.target.firstName.value = '';
     e.target.lastName.value = '';
     e.target.country.value = '';
     e.target.birthday.value = '';
-    
   }
   
   const today = getCurrentDate();
